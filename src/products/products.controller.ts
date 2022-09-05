@@ -18,36 +18,63 @@ export class ProductsController {
     @Body('description') prodDesc: string,
     @Body('price') prodPrice: number,
   ): any {
-    const generatedId = this.productsService.insertProduct(
+    const res = this.productsService.insertProduct(
       prodTitle,
       prodDesc,
       prodPrice,
     );
-    return { id: generatedId };
+    if (res) return { status: 200 };
+    else {
+      return { ststus: 400 };
+    }
   }
 
   @Get()
-  getAllProducts() {
-    return this.productsService.getProduct();
+  async getAllProducts() {
+    const products = await this.productsService.getProduct();
+    if (products.length > 0) return { ststus: 200, result: products };
+    else {
+      return { status: 400, msg: 'No product found' };
+    }
   }
 
   @Get(':id')
-  getOneProduct(@Param('id') id: string) {
-    return this.productsService.getOneProduct(id);
+  async getOneProduct(@Param('id') id: string) {
+    const product = await this.productsService.getOneProduct(id);
+    if (product) {
+      return { status: 200, result: product };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
   }
 
   @Patch(':id')
-  updateProduct(
+  async updateProduct(
     @Param('id') prodId: string,
     @Body('title') prodTitle: string,
     @Body('description') prodDesc: string,
     @Body('price') prodPrice: number,
   ) {
-    this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
+    const result = await this.productsService.updateProduct(
+      prodId,
+      prodTitle,
+      prodDesc,
+      prodPrice,
+    );
+    if (result) {
+      return { status: 200, message: 'Successfully updated' };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
   }
 
   @Delete(':id')
-  deteleProduct(@Param('id') prodId: string) {
-    this.productsService.deleteProduct(prodId);
+  async deteleProduct(@Param('id') prodId: string) {
+    const result = await this.productsService.deleteProduct(prodId);
+    if (result) {
+      return { status: 200, message: 'Successfully deleted' };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
   }
 }
