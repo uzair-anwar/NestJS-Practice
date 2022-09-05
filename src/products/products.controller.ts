@@ -14,14 +14,14 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
   @Post()
   addProduct(
-    @Body('title') prodTitle: string,
-    @Body('description') prodDesc: string,
-    @Body('price') prodPrice: number,
+    @Body('title') productTitle: string,
+    @Body('description') productDesc: string,
+    @Body('price') productPrice: number,
   ): any {
     const generatedId = this.productsService.insertProduct(
-      prodTitle,
-      prodDesc,
-      prodPrice,
+      productTitle,
+      productDesc,
+      productPrice,
     );
     return { id: generatedId };
   }
@@ -38,12 +38,17 @@ export class ProductsController {
 
   @Patch(':id')
   updateProduct(
-    @Param('id') prodId: string,
-    @Body('title') prodTitle: string,
-    @Body('description') prodDesc: string,
-    @Body('price') prodPrice: number,
+    @Param('id') productId: string,
+    @Body('title') productTitle: string,
+    @Body('description') productDesc: string,
+    @Body('price') productPrice: number,
   ) {
-    this.productsService.updateProduct(prodId, prodTitle, prodDesc, prodPrice);
+    this.productsService.updateProduct(
+      productId,
+      productTitle,
+      productDesc,
+      productPrice,
+    );
   }
 
   @Delete(':id')
