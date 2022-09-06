@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 088ab35a1229e11674f513e99b66ec5fa2e88f79
 import { Product } from './Product.model';
 
 @Injectable()
