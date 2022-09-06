@@ -1,7 +1,11 @@
 # compiled output
 /dist
 /node_modules
+<<<<<<< HEAD
 .env
+=======
+.env 
+>>>>>>> feature/product-DBADD
 
 # Logs
 logs
