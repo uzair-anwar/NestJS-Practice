@@ -8,7 +8,7 @@ export class AppController {
   @Get()
   @Header('Content-Type', 'text/html')
   getHello(): string {
-    console.log('HY');
+    console.log(process.env.PORT);
     return this.appService.getHello();
   }
 }

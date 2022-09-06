@@ -9,10 +9,10 @@ export class ProductsService {
     @InjectModel('Product') private readonly productModel: Model<Product>,
   ) {}
 
-  async insertProduct(title: string, desc: string, price: number) {
+  async insertProduct(title: string, description: string, price: number) {
     const newPeoduct = new this.productModel({
       title,
-      description: desc,
+      description,
       price,
     });
     const res = await newPeoduct.save();
@@ -45,17 +45,17 @@ export class ProductsService {
   }
 
   async updateProduct(
-    prodId: string,
+    productId: string,
     title: string,
-    desc: string,
+    description: string,
     price: number,
   ) {
-    const product = await this.findProduct(prodId);
+    const product = await this.findProduct(productId);
     if (title) {
       product.title = title;
     }
-    if (desc) {
-      product.description = desc;
+    if (description) {
+      product.description = description;
     }
     if (price) {
       product.price = price;
