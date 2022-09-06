@@ -50,25 +50,6 @@ export class ProductsController {
 
   @Patch(':id')
   async updateProduct(
-<<<<<<< HEAD
-=======
-=======
-    return { id: generatedId };
-  }
-
-  @Get()
-  getAllProducts() {
-    return this.productsService.getProduct();
-  }
-
-  @Get(':id')
-  getOneProduct(@Param('id') id: string) {
-    return this.productsService.getOneProduct(id);
-  }
-
-  @Patch(':id')
-  updateProduct(
->>>>>>> 088ab35a1229e11674f513e99b66ec5fa2e88f79
     @Param('id') productId: string,
     @Body('title') productTitle: string,
     @Body('description') productDesc: string,

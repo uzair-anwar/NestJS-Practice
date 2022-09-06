@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 088ab35a1229e11674f513e99b66ec5fa2e88f79
 import * as mongoose from 'mongoose';
 
 export const ProductSchema = new mongoose.Schema({
@@ -15,8 +11,4 @@ export interface Product extends mongoose.Document {
   title: string;
   description: string;
   price: number;
-<<<<<<< HEAD
-=======
-
->>>>>>> 088ab35a1229e11674f513e99b66ec5fa2e88f79
 }
