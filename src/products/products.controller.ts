@@ -18,11 +18,39 @@ export class ProductsController {
     @Body('description') productDesc: string,
     @Body('price') productPrice: number,
   ): any {
-    const generatedId = this.productsService.insertProduct(
+    const res = this.productsService.insertProduct(
       productTitle,
       productDesc,
       productPrice,
     );
+    if (res) return { status: 200 };
+    else {
+      return { ststus: 400 };
+    }
+  }
+
+  @Get()
+  async getAllProducts() {
+    const products = await this.productsService.getProduct();
+    if (products.length > 0) return { ststus: 200, result: products };
+    else {
+      return { status: 400, msg: 'No product found' };
+    }
+  }
+
+  @Get(':id')
+  async getOneProduct(@Param('id') id: string) {
+    const product = await this.productsService.getOneProduct(id);
+    if (product) {
+      return { status: 200, result: product };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
+  }
+
+  @Patch(':id')
+  async updateProduct(
+=======
     return { id: generatedId };
   }
 
@@ -43,16 +71,26 @@ export class ProductsController {
     @Body('description') productDesc: string,
     @Body('price') productPrice: number,
   ) {
-    this.productsService.updateProduct(
+    const result = await this.productsService.updateProduct(
       productId,
       productTitle,
       productDesc,
       productPrice,
     );
+    if (result) {
+      return { status: 200, message: 'Successfully updated' };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
   }
 
   @Delete(':id')
-  deteleProduct(@Param('id') prodId: string) {
-    this.productsService.deleteProduct(prodId);
+  async deteleProduct(@Param('id') prodId: string) {
+    const result = await this.productsService.deleteProduct(prodId);
+    if (result) {
+      return { status: 200, message: 'Successfully deleted' };
+    } else {
+      return { status: 400, message: 'Product an not find' };
+    }
   }
 }
